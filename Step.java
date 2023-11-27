@@ -5,6 +5,7 @@ public class Step {
         this.category = category;
     }
 
+
     //what kind of recipe step is this (preparation, cooking, post cooking handling)
     private String category;
 
@@ -12,6 +13,8 @@ public class Step {
     private String stepProcess;
 
     /*Setters*/
+
+    //what kind of recipe step is this (preparation, cooking, post cooking handling)
     public void setCategory(String category){
         this.category = category;
     }

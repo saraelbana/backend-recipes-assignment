@@ -59,7 +59,7 @@ public class Ingredient {
                 } else if (this.unit.equals("gm")) {
                     //1 cup= 240 gram
                     this.amount *=240f;
-                    this.unit = "gm";
+                    this.unit = "km";
                 }
                 return succeededToConvert;
 
@@ -67,9 +67,11 @@ public class Ingredient {
                 if (this.unit.equals("cup")) {
                     //1 cup= 110 gram
                     this.amount *= 110f;
+                    this.unit = "gm";
                 } else if(this.unit.equals("km")) {
                    //1 kilogram = 1000 grams
                     this.amount *= 1000f;
+                    this.unit = "gm";
                 }
                 return succeededToConvert;
 
@@ -80,15 +82,22 @@ public class Ingredient {
                     if(this.amount < 60f){
                         return succeededToConvert = -1;
                     }
+                    else{
+                        // 240 gm = 1 cup
+                        this.amount /= 240f;
+                        this.unit = "cup";
+                        return succeededToConvert;
+                    }
                 } else if (this.unit.equals("km")) {
-                    //1 gram = 0.001 kilograms
+                    // 1kg = 4.25 cups
+                    this.amount /= 4.25f;
+                    this.unit = "cup";
+                    return succeededToConvert;
                 }
-                return succeededToConvert;
-
             default:
+                succeededToConvert = -1;
                 return succeededToConvert;
         }
-        return succeededToConvert;
     }
 
 }
