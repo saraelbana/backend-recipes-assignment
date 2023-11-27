@@ -62,7 +62,7 @@ public class Ingredient {
                     this.unit = "gm";
                 }
                 return succeededToConvert;
-                break;
+
             case "gm":
                 if (this.unit.equals("cup")) {
                     //1 cup= 110 gram
@@ -72,24 +72,23 @@ public class Ingredient {
                     this.amount *= 1000f;
                 }
                 return succeededToConvert;
-                break;
+
             case "cup":
-                if (unit == "gm") {
+                if (this.unit.equals("gm")) {
                     // 1/4 of a cup is the smallest measure for cup no recipe can be done
                     // in a "cup measurement" less than 1/4 cup which is 60 grams
                     if(this.amount < 60f){
-                        succeededToConvert = -1;
-                        break;
+                        return succeededToConvert = -1;
                     }
-                } else if (unit == "km") {
+                } else if (this.unit.equals("km")) {
                     //1 gram = 0.001 kilograms
                 }
                 return succeededToConvert;
-                break;
+
             default:
                 return succeededToConvert;
-                break;
         }
+        return succeededToConvert;
     }
 
 }
