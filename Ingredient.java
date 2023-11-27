@@ -2,6 +2,15 @@ public class Ingredient {
     public Ingredient() {
     }
 
+    public Ingredient(String name, float amount) {
+        this.name = name;
+        this.amount = amount;
+    }
+    //this is a special constructor for a pinch of salt ingredient
+    public Ingredient(String name, String unit) {
+        this.name = name;
+        this.unit = unit.toLowerCase();
+    }
     public Ingredient(String name, float amount, String unit) {
         this.name = name;
         this.unit = unit.toLowerCase();
@@ -98,6 +107,10 @@ public class Ingredient {
                 succeededToConvert = -1;
                 return succeededToConvert;
         }
+    }
+
+    public void displayIngredient(){
+        System.out.println(getAmount() + " " + getUnit() + " " + getName());
     }
 
 }

@@ -15,6 +15,7 @@ public class Recipe {
         this.category = getCategory();
 
     }
+
     //declare a recipe obj using an array list of ingredients
     public Recipe(ArrayList<Ingredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
@@ -24,6 +25,26 @@ public class Recipe {
     private String category; // appetizer, main dish, side dish or dessert
     private ArrayList<Ingredient> recipeIngredients = new ArrayList<Ingredient>();
     private ArrayList<Step> recipeSteps = new ArrayList<Step>();
+    private String servedWith;
+    public String prepTime;
+    public int servings; // this recipe is for how many ppl
+    public String cookingTime;
+
+    public enum FiveStarRating {
+        ONE_STAR(1),
+        TWO_STARS(2),
+        THREE_STARS(3),
+        FOUR_STARS(4),
+        FIVE_STARS(5);
+        private final int value;
+        FiveStarRating(int value) {
+            this.value = value;
+        }
+        public int getValue() {
+            return value;
+        }
+    }
+   private FiveStarRating rating;
 
     /* ////////////Setters//////////// */
 
@@ -41,9 +62,17 @@ public class Recipe {
     public void setRecipeIngredients(ArrayList<Ingredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
-   //assign a list of steps to this object
+
+    //assign a list of steps to this object
     public void setRecipeSteps(ArrayList<Step> recipeSteps) {
         this.recipeSteps = recipeSteps;
+    }
+
+    public void betterServedWith(String servedWith) {
+        this.servedWith = servedWith;
+    }
+    public void setRecipeRating(FiveStarRating recipeRating){
+        this.rating = recipeRating;
     }
 
     /* ////////////Getters//////////// */
@@ -58,21 +87,38 @@ public class Recipe {
         return category;
     }
 
+    public String getServedWithDish() {
+        return servedWith;
+    }
+
     // return an arraylist of objects of type Ingredient which is the list of all ingredients
     public ArrayList<Ingredient> getRecipeIngredients() {
         return recipeIngredients;
     }
+    //get the recipe rating
+    public FiveStarRating getRating() {
+        return rating;
+    }
 
     //return how many ingredient the recipe have
-    public int recipeIngredientsCount(){
+    public int recipeIngredientsCount() {
         return recipeIngredients.size();
     }
 
 
     // adding a new ingredient to the arraylist of ingredients
-    public void addNewIngredient(String ingName, float ingAmount, String ingUnit)
-    {
+    public void addNewIngredient(String ingName, float ingAmount, String ingUnit) {
         Ingredient newIngredient = new Ingredient(ingName, ingAmount, ingUnit);
+        this.recipeIngredients.add(newIngredient);
+    }
+
+    public void addNewIngredient(String ingName, float ingAmount) {
+        Ingredient newIngredient = new Ingredient(ingName, ingAmount);
+        this.recipeIngredients.add(newIngredient);
+    }
+
+    public void addNewIngredient(String ingName, String ingUnit) {
+        Ingredient newIngredient = new Ingredient(ingName, ingUnit);
         this.recipeIngredients.add(newIngredient);
     }
 
@@ -93,6 +139,7 @@ public class Recipe {
             return true;
         } else return false;
     }
+
     // returns true if step found and successfully deleted
     // else return false because it's not found
     public boolean deleteStep(String stepToBeDeleted) {
@@ -103,6 +150,7 @@ public class Recipe {
             return true;
         } else return false;
     }
+
     //search for an ingredient and returns its position in the ingredients arrayList
     // a basic sequential search
     private int searchForIngredient(Ingredient searchedForIngredient) {
@@ -130,4 +178,22 @@ public class Recipe {
         return -1;
     }
 
+    //display the recipe ingredients and steps in the terminal
+    public void displayRecipe() {
+        System.out.println(getName());
+        System.out.println("Ingredients:");
+        for (int i = 0; i < recipeIngredients.size(); i++) {
+            System.out.print("* ");
+            recipeIngredients.get(i).displayIngredient();
+        }
+        System.out.println("Steps:");
+        for (int i = 0; i < recipeSteps.size(); i++) {
+            System.out.print(i + 1 + " ");
+            recipeSteps.get(i).displayStep();
+        }
+
+    }
+    public void displayRecipeRating(){
+        System.out.println("This Recipe rating is " + rating);
+    }
 }

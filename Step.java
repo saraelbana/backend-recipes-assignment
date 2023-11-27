@@ -29,5 +29,8 @@ public class Step {
     public String getThisStepCategory() {
         return category;
     }
+    public void displayStep(){
+        System.out.println(this.getStep());
+    }
 
 }
