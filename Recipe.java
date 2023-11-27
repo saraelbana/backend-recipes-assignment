@@ -65,14 +65,22 @@ public class Recipe {
 
     //return how many ingredient the recipe have
     public int recipeIngredientsCount(){
-        return recipeIngredients.size
+        return recipeIngredients.size();
     }
 
 
     // adding a new ingredient to the arraylist of ingredients
-    public void addNewIngredient(String ingName, float ingAmount, String ingUnit) {
+    public void addNewIngredient(String ingName, float ingAmount, String ingUnit)
+    {
         Ingredient newIngredient = new Ingredient(ingName, ingAmount, ingUnit);
         this.recipeIngredients.add(newIngredient);
+    }
+
+    //add recipe steps
+    public void addNewStep(String stepAdded) {
+        Step newStep = new Step();
+        newStep.setStepProcess(stepAdded);
+        recipeSteps.add(newStep);
     }
 
     // returns true if ingredient found and successfully deleted
